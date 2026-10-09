@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Quick AI Reply - 设置</title>
+  <link rel="stylesheet" href="settings.css" />
+</head>
+<body>
+  <div class="wrap">
+    <h1>设置</h1>
+
+    <!-- 提示词管理 -->
+    <section class="card">
+      <div class="card-head" id="promptHead">
+        <span>提示词管理</span>
+        <span class="arrow">▶</span>
+      </div>
+      <div class="card-body" id="promptBody" hidden>
+        <p class="hint">保存多套系统提示词，方便在不同场景下快速切换。保存后可在下方「回复设置」或「推文生成设置」中使用。</p>
+        <div class="prompt-list" id="promptList"></div>
+        <div class="row">
+          <input id="newPromptName" type="text" placeholder="提示词名称，例如：健身博主互动" />
+          <button id="addPrompt" class="btn">保存当前系统提示词</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- 通用设置 -->
+    <section class="card">
+      <h2>通用设置</h2>
+      <label class="field">
+        <span>选择模型：</span>
+        <select id="provider">
+          <option value="deepseek">Deepseek Api</option>
+          <option value="openai">OpenAI Api</option>
+          <option value="custom">自定义（OpenAI 兼容接口）</option>
+        </select>
+      </label>
+
+      <label class="field">
+        <span id="keyLabel">Deepseek API Key：</span>
+        <input id="apiKey" type="password" placeholder="sk-..." autocomplete="off" />
+      </label>
+      <a class="link" id="getKeyLink" href="https://platform.deepseek.com/api_keys" target="_blank" rel="noreferrer">获取 API Key</a>
+
+      <label class="field" id="baseUrlField" hidden>
+        <span>接口地址：</span>
+        <input id="baseUrl" type="text" placeholder="https://api.deepseek.com" />
+      </label>
+
+      <label class="field" id="modelField" hidden>
+        <span>模型名称：</span>
+        <input id="model" type="text" placeholder="deepseek-chat" />
+      </label>
+    </section>
+
+    <!-- 回复设置 -->
+    <section class="card">
+      <h2>回复设置（AI 自动回复）</h2>
+
+      <label class="field">
+        <span>回复长度：</span>
+        <input id="replyLength" type="range" min="5" max="200" step="5" value="20" />
+        <input id="replyLengthNum" type="number" min="5" max="200" value="20" class="num" />
+      </label>
+
+      <div class="field block">
+        <span>回复语气：</span>
+        <div class="radios" id="toneRadios"></div>
+      </div>
+
+      <div class="field block">
+        <span>回复语言：</span>
+        <div class="radios" id="langRadios"></div>
+      </div>
+
+      <div class="field block">
+        <span>回复系统提示词（AI 回复时使用）：</span>
+        <textarea id="systemPrompt" rows="8" placeholder="填写系统提示词..."></textarea>
+        <div class="count">字符数：<span id="charCount">0</span></div>
+        <span class="hint-inline">作用范围：帖子下方点击 Reply 或「AI」按钮时生成的回复内容</span>
+      </div>
+
+      <label class="field">
+        <span>推文截取（字数上限）：</span>
+        <input id="tweetTruncate" type="number" min="0" value="0" class="num" />
+        <span class="hint-inline">0 为整篇推文，非 0 时如推文超出则截取前 N 字</span>
+      </label>
+
+      <label class="field">
+        <span>点击 Reply 时自动生成：</span>
+        <input id="autoFillOnReply" type="checkbox" checked />
+        <span class="hint-inline">开启后，点击帖子下的 Reply 即自动生成并填入回复</span>
+      </label>
+    </section>
+
+    <!-- 推文生成设置 -->
+    <section class="card">
+      <h2>推文生成设置</h2>
+
+      <label class="field">
+        <span>参考 TL1 热榜：</span>
+        <input id="tweetUseTrending" type="checkbox" checked />
+        <span class="hint-inline">生成时自动抓取 tl1.com 正在走热的话题做选题参考；政治国家类话题会被双重过滤（本地关键词 + 模型红线），低俗擦边不限制</span>
+      </label>
+
+      <div class="field block">
+        <span>发帖类型轮换（勾选 = 参与自动发帖轮换）：</span>
+        <div id="typeList" class="type-list"></div>
+        <div class="row">
+          <button id="addType" type="button" class="btn btn-sm">+ 添加自定义类型</button>
+        </div>
+        <span class="hint-inline">每种类型可改名、可自定义提示词（留空用内置默认）；「热点评论」类型发帖时自动抓取 TL1 热榜；全部取消勾选时退回全部内置类型。改完记得点下方「保存设置」</span>
+      </div>
+
+      <div class="field block">
+        <span>推文系统提示词（AI 发推时使用）：</span>
+        <textarea id="tweetPrompt" rows="8" placeholder="填写生成推文的系统提示词..."></textarea>
+        <div class="count">字符数：<span id="tweetCharCount">0</span></div>
+        <span class="hint-inline">作用范围：x.com 右下角「AI发推」悬浮按钮生成的推文内容，与上面的回复提示词互不影响</span>
+      </div>
+
+      <p class="hint">使用方式：x.com 页面右下角点击「AI发推」→ 输入可选主题 → 生成并填入发帖框（发布仍由你手动确认）。留空主题时完全按此提示词生成。</p>
+    </section>
+
+    <div class="actions">
+      <button id="save" class="btn btn-primary">保存设置</button>
+      <button id="reset" class="btn">重置为默认</button>
+      <button id="test" class="btn">测试连接</button>
+      <button id="exportCfg" class="btn">导出配置</button>
+      <button id="importCfg" class="btn">导入配置</button>
+      <input id="cfgFile" type="file" accept="application/json,.json" hidden />
+    </div>
+    <div id="status" class="status"></div>
+  </div>
+
+  <script src="settings.js"></script>
+</body>
+</html>

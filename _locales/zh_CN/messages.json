@@ -1,0 +1,10 @@
+{
+  "extName": {
+    "message": "Quick AI Reply for X.com",
+    "description": "扩展名称"
+  },
+  "extDesc": {
+    "message": "点击 X（Twitter）帖子的 Reply，根据帖子内容用 AI 自动生成回复并填入回复框。",
+    "description": "扩展描述"
+  }
+}

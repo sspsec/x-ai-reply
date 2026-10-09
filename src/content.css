@@ -1,0 +1,340 @@
+/* X 会对操作栏组内元素套用 flex / 按钮默认样式，
+   所以这里全部用 !important 锁死，防止按钮被拉伸、压扁或变色 */
+.quickai-btn {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  flex: 0 0 auto !important;
+  align-self: center !important;
+  box-sizing: border-box !important;
+  margin: 0 0 0 6px !important;
+  padding: 0 !important;
+  width: 30px !important;
+  height: 26px !important;
+  min-width: 30px !important;
+  max-width: 30px !important;
+  border-radius: 999px !important;
+  border: 1px solid rgb(29, 155, 240) !important;
+  background: rgba(29, 155, 240, 0.1) !important;
+  color: rgb(29, 155, 240) !important;
+  font-size: 12px !important;
+  font-weight: 700 !important;
+  line-height: 1 !important;
+  font-family: inherit;
+  text-align: center;
+  vertical-align: middle;
+  appearance: none;
+  -webkit-appearance: none;
+  outline: none !important;
+  box-shadow: none !important;
+  text-decoration: none !important;
+  text-transform: none !important;
+  letter-spacing: normal !important;
+  user-select: none;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.quickai-btn:hover,
+.quickai-btn:focus {
+  background: rgba(29, 155, 240, 0.22) !important;
+  transform: none !important;
+  filter: none !important;
+}
+
+.quickai-btn:active {
+  background: rgba(29, 155, 240, 0.32) !important;
+}
+
+#quickai-toast {
+  position: fixed;
+  z-index: 2147483647;
+  left: 50%;
+  bottom: 28px;
+  transform: translateX(-50%);
+  max-width: 80vw;
+  padding: 10px 16px;
+  border-radius: 10px;
+  background: rgba(15, 20, 25, 0.94);
+  color: #fff;
+  font-size: 14px;
+  line-height: 1.4;
+  display: none;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.3);
+}
+
+#quickai-toast.quickai-ok {
+  background: rgb(0, 168, 84);
+}
+
+#quickai-toast.quickai-err {
+  background: rgb(220, 60, 60);
+}
+
+/* ---------- AI 发推：悬浮按钮 ---------- */
+
+.quickai-fab {
+  position: fixed !important;
+  right: 24px !important;
+  bottom: 90px !important;
+  z-index: 2147483000 !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 0 !important;
+  width: 64px !important;
+  height: 34px !important;
+  border-radius: 17px !important;
+  border: none !important;
+  background: rgb(29, 155, 240) !important;
+  color: #fff !important;
+  font-size: 13px !important;
+  font-weight: 700 !important;
+  line-height: 1 !important;
+  box-shadow: 0 4px 14px rgba(29, 155, 240, 0.45) !important;
+  cursor: pointer !important;
+  user-select: none;
+  transition: background 0.15s ease;
+}
+
+.quickai-fab:hover,
+.quickai-fab:focus {
+  background: rgb(26, 140, 216) !important;
+  transform: none !important;
+}
+
+/* ---------- AI 发推：面板 ---------- */
+
+.quickai-panel {
+  position: fixed !important;
+  right: 24px !important;
+  bottom: 134px !important;
+  z-index: 2147483000 !important;
+  display: none;
+  width: 320px !important;
+  box-sizing: border-box !important;
+  padding: 16px !important;
+  border-radius: 16px !important;
+  border: 1px solid rgba(83, 100, 145, 0.18) !important;
+  background: #fff !important;
+  box-shadow:
+    0 12px 40px rgba(0, 0, 0, 0.16),
+    0 2px 8px rgba(0, 0, 0, 0.06) !important;
+  font-family: -apple-system, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif !important;
+  color: #0f1419 !important;
+  text-align: left;
+  accent-color: rgb(29, 155, 240);
+  max-height: 82vh !important;
+  overflow-y: auto !important;
+}
+
+.quickai-panel-head {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  margin: 0 0 10px !important;
+}
+
+.quickai-panel-title {
+  font-size: 15px !important;
+  font-weight: 700 !important;
+  margin: 0 !important;
+  color: #0f1419 !important;
+}
+
+.quickai-panel-close {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 28px !important;
+  height: 28px !important;
+  border: none !important;
+  border-radius: 50% !important;
+  background: transparent !important;
+  color: rgb(83, 100, 145) !important;
+  font-size: 20px !important;
+  line-height: 1 !important;
+  cursor: pointer !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+.quickai-panel-close:hover {
+  background: rgba(15, 20, 25, 0.08) !important;
+  color: #0f1419 !important;
+}
+
+.quickai-panel-hint {
+  font-size: 11px !important;
+  color: rgb(139, 152, 167) !important;
+  line-height: 1.5 !important;
+  margin: -2px 0 10px !important;
+}
+
+.quickai-panel-input {
+  box-sizing: border-box !important;
+  width: 100% !important;
+  height: 76px !important;
+  resize: vertical !important;
+  padding: 8px 10px !important;
+  border-radius: 8px !important;
+  border: 1px solid rgb(207, 217, 222) !important;
+  background: #fff !important;
+  color: #0f1419 !important;
+  font-size: 13px !important;
+  line-height: 1.5 !important;
+  font-family: inherit !important;
+  outline: none !important;
+  margin: 0 0 10px !important;
+}
+
+.quickai-panel-input:focus {
+  border-color: rgb(29, 155, 240) !important;
+}
+
+.quickai-panel-row {
+  display: flex !important;
+  gap: 8px !important;
+}
+
+.quickai-panel-btn {
+  display: block !important;
+  width: 100% !important;
+  text-align: center !important;
+  flex: 1 1 auto !important;
+  padding: 9px 0 !important;
+  border-radius: 9999px !important;
+  border: 1px solid rgb(207, 217, 222) !important;
+  background: #fff !important;
+  color: #0f1419 !important;
+  font-size: 13px !important;
+  font-weight: 700 !important;
+  cursor: pointer !important;
+  line-height: 1.2 !important;
+  transition: background 0.15s ease;
+}
+
+.quickai-panel-btn:hover {
+  background: rgba(15, 20, 25, 0.06) !important;
+}
+
+.quickai-panel-btn-primary {
+  border-color: rgb(29, 155, 240) !important;
+  background: rgb(29, 155, 240) !important;
+  color: #fff !important;
+}
+
+.quickai-panel-btn-primary:disabled {
+  opacity: 0.6 !important;
+  cursor: not-allowed !important;
+}
+
+/* ---------- 自动浏览控制区 ---------- */
+
+.quickai-panel-hr {
+  height: 1px !important;
+  background: rgba(83, 100, 145, 0.25) !important;
+  margin: 12px 0 10px !important;
+  border: none !important;
+}
+
+.quickai-panel-field {
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  font-size: 12px !important;
+  color: #0f1419 !important;
+  margin: 0 0 8px !important;
+}
+
+.quickai-panel-field > span:first-child {
+  flex: 0 0 auto !important;
+  min-width: 52px !important;
+}
+
+.quickai-panel-field input[type='range'] {
+  flex: 1 1 auto !important;
+  min-width: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.quickai-panel-field b {
+  min-width: 34px !important;
+  text-align: right !important;
+  font-weight: 700 !important;
+}
+
+.quickai-panel-num {
+  box-sizing: border-box !important;
+  width: 56px !important;
+  padding: 4px 6px !important;
+  border: 1px solid rgb(207, 217, 222) !important;
+  border-radius: 6px !important;
+  font-size: 12px !important;
+  margin: 0 !important;
+}
+
+.quickai-panel-check {
+  cursor: pointer !important;
+}
+
+.quickai-panel-check input {
+  margin: 0 !important;
+}
+
+.quickai-panel-status {
+  font-size: 12px !important;
+  color: rgb(83, 100, 145) !important;
+  margin-top: 10px !important;
+  line-height: 1.4 !important;
+  background: rgba(29, 155, 240, 0.08) !important;
+  border-radius: 8px !important;
+  padding: 6px 10px !important;
+}
+
+.quickai-panel-btn-warn {
+  border-color: rgb(245, 158, 11) !important;
+  background: rgb(245, 158, 11) !important;
+  color: #fff !important;
+}
+
+.quickai-panel-btn-active {
+  border-color: rgb(220, 60, 60) !important;
+  background: rgb(220, 60, 60) !important;
+  color: #fff !important;
+}
+
+/* 深色模式适配 */
+@media (prefers-color-scheme: dark) {
+  .quickai-panel {
+    background: rgb(21, 32, 43) !important;
+    border-color: rgb(47, 51, 54) !important;
+    color: #e7e9ea !important;
+  }
+  .quickai-panel-title,
+  .quickai-panel {
+    color: #e7e9ea !important;
+  }
+  .quickai-panel-input {
+    background: rgb(21, 32, 43) !important;
+    border-color: rgb(83, 100, 145) !important;
+    color: #e7e9ea !important;
+  }
+  .quickai-panel-btn {
+    background: rgb(21, 32, 43) !important;
+    border-color: rgb(83, 100, 145) !important;
+    color: #e7e9ea !important;
+  }
+  .quickai-panel-field {
+    color: #e7e9ea !important;
+  }
+  .quickai-panel-status {
+    color: rgb(139, 152, 167) !important;
+  }
+  .quickai-panel-num {
+    background: rgb(21, 32, 43) !important;
+    border-color: rgb(83, 100, 145) !important;
+    color: #e7e9ea !important;
+  }
+}
