@@ -18,6 +18,11 @@
 - **提示词管理**：保存多套系统提示词，随时切换
 - **测试连接**：一键验证 API Key 是否可用
 
+<img width="798" height="892" alt="image" src="https://github.com/user-attachments/assets/5e26c62d-9bd0-400b-9506-011b0f7fd634" />
+
+<img width="307" height="705" alt="image" src="https://github.com/user-attachments/assets/b597c1e4-9bc2-470c-8a1d-f3f98fad5306" />
+
+
 ## 安装（开发者模式加载）
 
 1. 打开 Chrome，地址栏输入 `chrome://extensions/` 回车
